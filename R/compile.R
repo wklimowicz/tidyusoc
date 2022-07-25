@@ -101,9 +101,7 @@ usoc_compile <- function(directory, extra_mappings = NULL, save_variables_report
  usoc_files[, `:=`(
                     wave = factor(wave, levels = wave_letter, ordered = TRUE),
                     waveid = factor(waveid, levels = wave_year_mapping$waveid, ordered = TRUE)
-                    )
-
-                    ]
+                    )]
 
   # If DATA_DIRECTORY environment variable is present, save there.
   if (Sys.getenv("DATA_DIRECTORY") != "") {
