@@ -32,7 +32,7 @@ user_extra_mappings <- function(usoc_file_column_names) {
 usoc <- usoc_compile("../rds", extra_mappings = user_extra_mappings)
 usoc <- usoc_compile("../rds", extra_mappings = NULL)
 
-
+usoc <- usoc_load()
 
 
 usoc[is.na(race), .N, wave]
