@@ -1,0 +1,30 @@
+Package: tidyusoc
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.1
+Authors@R: 
+    person("Wojtek", "Klimowicz", , "wojtekklimowicz96@gmail.com", role = c("aut", "cre"))
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Imports:
+    data.table,
+    rlang,
+    haven,
+    cli,
+    dplyr,
+    fst,
+    purrr,
+    stringr,
+    tibble,
+    readr,
+    magrittr
+Suggests: 
+    testthat (>= 3.0.0),
+    polite,
+    rvest,
+    fs,
+    withr,
+    janitor
+Config/testthat/edition: 3

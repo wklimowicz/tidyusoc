@@ -1,0 +1,44 @@
+url: https://wklimowicz.github.io/tidyusoc/
+template:
+  bootstrap: 5
+  # bootswatch: flatly
+
+development:
+  version_tooltip: "Development version"
+
+reference:
+- title: Setup 
+- subtitle: Convert and Compile
+  desc: Convert from `.sav` to `.Rds` and compile to one dataset
+  contents:
+  - starts_with("usoc_convert")
+  - starts_with("usoc_compile")
+  - usoc_load
+- subtitle: Add custom columns
+  desc: Brings in extra columns
+  contents:
+  - pick
+
+navbar:
+  structure:
+    left:  [home, reference, variables,  replicate]
+    right: [github]
+  components:
+    home:
+      text: Get started
+      href: index.html
+    # variables:
+    #   text: Adding more variables
+    #   href: articles/Adding_Variables.html
+
+# navbar:
+#   structure:
+#       left:  [variables, replicate, reference]
+#       right: [search, github]
+#   components:
+#       home:
+#         icon: fas fa-home fa-lg
+#         href: index.html
+#       variables:
+#         href: articles/Adding_Variables.html
+#         aria-label: Adding more Variables

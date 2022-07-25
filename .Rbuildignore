@@ -1,0 +1,8 @@
+^LICENSE\.md$
+^usoc_data$
+^README\.Rmd$
+^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^usoc_variables_report.csv$
