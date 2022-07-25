@@ -19,6 +19,9 @@
 #' @export
 usoc_compile <- function(directory, extra_mappings = NULL, save_variables_report = TRUE) {
 
+  # R CMD Check
+  wave <- waveid <- NULL
+
   bhps_directory <- paste0(directory, "/bhps")
   ukhls_directory <- paste0(directory, "/ukhls")
 
@@ -94,6 +97,13 @@ usoc_compile <- function(directory, extra_mappings = NULL, save_variables_report
 
   # Reorder columns
   data.table::setcolorder(usoc_files, c("wave", "waveid", "year", "pidp"))
+
+ usoc_files[, `:=`(
+                    wave = factor(wave, levels = wave_letter, ordered = TRUE),
+                    waveid = factor(waveid, levels = wave_year_mapping$waveid, ordered = TRUE)
+                    )
+
+                    ]
 
   # If DATA_DIRECTORY environment variable is present, save there.
   if (Sys.getenv("DATA_DIRECTORY") != "") {
