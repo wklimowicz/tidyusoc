@@ -31,7 +31,6 @@ navbar:
     #   text: Adding more variables
     #   href: articles/Adding_Variables.html
 
-# navbar:
 #   structure:
 #       left:  [variables, replicate, reference]
 #       right: [search, github]
