@@ -32,7 +32,7 @@ usoc_convert(usoc_directory = "spss/spss25",
              filter_files = "indresp")
 
 # Compile the INDRESP files in the rds folder
-usoc_compile(directory = "rds")
+usoc <- usoc_compile(directory = "rds")
 ```
 
 A small set of core variables is included by default:

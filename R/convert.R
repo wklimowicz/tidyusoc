@@ -61,7 +61,10 @@ usoc_convert_directory <- function(usoc_directory, output_directory, filter_file
     invokeRestart("abort")
   }
 
+  # Create directories
   dir.create(file.path(output_directory), showWarnings = FALSE)
+  dir.create(file.path(output_directory, "bhps"), showWarnings = FALSE)
+  dir.create(file.path(output_directory, "ukhls"), showWarnings = FALSE)
 
   cli::cli_alert_info("Found {length(files_in_directory)} file{?s} in directory")
 
