@@ -6,7 +6,7 @@ setwd(here::here())
 devtools::load_all()
 
 
-usoc_convert("../spss/spss25", "../rds", filter_files = "indresp")
+usoc_convert("../spss/spss25", "../rds", filter_files = "youth")
 
 
 user_extra_mappings <- function(usoc_file_column_names) {
@@ -30,7 +30,20 @@ user_extra_mappings <- function(usoc_file_column_names) {
 }
 
 usoc <- usoc_compile("../rds", extra_mappings = user_extra_mappings)
-usoc <- usoc_compile("../rds", extra_mappings = NULL)
+
+
+youth_extra_mappings <- function(usoc_file_column_names) {
+
+  custom_variables <- tibble::tribble(
+    ~usoc_name,       ~new_name,     ~type,
+    "yptcha", "yptcha", "factor"
+    )
+
+  return(custom_variables)
+
+}
+
+usoc <- usoc_compile("../rds", extra_mappings = youth_extra_mappings, questionnare = "youth")
 
 usoc <- usoc_load()
 

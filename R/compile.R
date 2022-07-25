@@ -17,7 +17,10 @@
 #' @importFrom rlang .data
 #'
 #' @export
-usoc_compile <- function(directory, extra_mappings = NULL, save_variables_report = TRUE) {
+usoc_compile <- function(directory,
+                         extra_mappings = NULL,
+                         save_variables_report = TRUE,
+                         questionnare = "indresp") {
 
   # R CMD Check
   wave <- waveid <- NULL
@@ -28,10 +31,19 @@ usoc_compile <- function(directory, extra_mappings = NULL, save_variables_report
   bhps_waves <- get_bhps_waves(bhps_directory)
   ukhls_waves <- get_ukhls_waves(ukhls_directory)
 
+    # Take only files that exist
+
+  bhps_existing <- c(paste0(bhps_directory, "/", bhps_waves, "_", questionnare, ".Rds"))
+  bhps_waves <- bhps_waves[file.exists(bhps_existing)]
+
+  ukhls_existing <- c(paste0(ukhls_directory, "/", ukhls_waves, "_", questionnare, ".Rds"))
+  ukhls_waves <- ukhls_waves[file.exists(ukhls_existing)]
+
+
   bhps_files <- lapply(bhps_waves,
     compile_usoc_file,
     path = directory,
-    ending = "indresp",
+    ending = questionnare,
     survey = "bhps",
     extra_mappings = extra_mappings
   )
@@ -39,15 +51,15 @@ usoc_compile <- function(directory, extra_mappings = NULL, save_variables_report
   ukhls_files <- lapply(ukhls_waves,
     compile_usoc_file,
     path = directory,
-    ending = "indresp",
+    ending = questionnare,
     survey = "ukhls",
     extra_mappings = extra_mappings
   )
 
-
+    
   usoc_files <- c(purrr::map(bhps_files, 1), purrr::map(ukhls_files, 1))
-
   usoc_mapping <- c(purrr::map(bhps_files, 2), purrr::map(ukhls_files, 2))
+
 
   if (save_variables_report == TRUE) {
 
