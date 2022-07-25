@@ -487,7 +487,8 @@ test_that("Converting and compiling runs succesfully", {
 
 
   test_convert_compile <- function() {
-    Sys.setenv(DATA_DIRECTORY = ".")
+    
+    withr::local_envvar(DATA_DIRECTORY = ".")
 
     usoc_convert("test", "test_rds_data/")
 
