@@ -22,12 +22,14 @@ usoc_convert <- function(usoc_directory, new_directory, filter_files = "indresp"
 
   usoc_convert_directory(paste0(usoc_directory, "/bhps"),
     paste0(new_directory, "/bhps"),
+    new_directory,
     filter_files = filter_files
   )
 
   cli::cli_h1("Converting UKHLS")
   usoc_convert_directory(paste0(usoc_directory, "/ukhls"),
     paste0(new_directory, "/ukhls"),
+    new_directory,
     filter_files = filter_files
   )
 
@@ -45,7 +47,7 @@ usoc_convert <- function(usoc_directory, new_directory, filter_files = "indresp"
 
 #' @importFrom rlang .data
 #' @importFrom haven labelled
-usoc_convert_directory <- function(usoc_directory, output_directory, filter_files = NULL) {
+usoc_convert_directory <- function(usoc_directory, output_directory, top_level_dir, filter_files = NULL) {
 
   files_in_directory <- list.files(usoc_directory)
 
@@ -62,9 +64,8 @@ usoc_convert_directory <- function(usoc_directory, output_directory, filter_file
   }
 
   # Create directories
+  dir.create(file.path(top_level_dir), showWarnings = FALSE)
   dir.create(file.path(output_directory), showWarnings = FALSE)
-  dir.create(file.path(output_directory, "bhps"), showWarnings = FALSE)
-  dir.create(file.path(output_directory, "ukhls"), showWarnings = FALSE)
 
   cli::cli_alert_info("Found {length(files_in_directory)} file{?s} in directory")
 
