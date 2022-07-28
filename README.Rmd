@@ -109,5 +109,11 @@ Adding an environment variable called `DATA_DIRECTORY` pointing at a folder, aut
 
 ```{r eval = FALSE}
 library(tidyusoc)
-usoc <- usoc_load(file = "indresp")
+usoc <- usoc_load()
+```
+
+To read any of the other compiled files change the argument:
+
+```{r eval = FALSE}
+usoc <- usoc_load(file = "youth")
 ```
