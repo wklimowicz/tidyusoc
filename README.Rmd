@@ -63,10 +63,10 @@ tibble::tribble(~Variable, ~Description,
                 ) |> kableExtra::kbl(format = "pipe")
 ```
 
-To add more variables, use the `extra_mappings` function. For variables that change over time use `pick`. For example, number of A-Level's is:
+To add more variables, use the `extra_mappings` function. For variables that change over time use `pick`. For example, life satisfaction is:
 
-* `qnqfedj` in waves BH1 to BH18
-* `alevel` in waves 9 to 11
+* `lfsato` in waves 6-10 and 12-18 of the BHPS.
+* `sclfsato` in waves 1-11 of the UKHLS.
 
 The variable BMI (`bmi_dv`) doesn't change over time, so it's passed as a string.
 
@@ -74,11 +74,11 @@ The variable BMI (`bmi_dv`) doesn't change over time, so it's passed as a string
 
 custom_mappings <- function(cols) {
 
-    alevels <- pick(c("nqfedj", "alevel"), cols)
+    life_sat <- pick(c("sclfsato", "lfsato"), cols)
 
     custom_variables <- tibble::tribble(
         ~usoc_name, ~new_name, ~type,
-        alevels, "alevels", "factor",
+        life_sat, "life_satisfaction", "factor",
         "bmi_dv", "bmi_dv", "numeric"
     )
 
@@ -90,11 +90,24 @@ usoc <- usoc_compile("rds", extra_mappings = custom_mappings)
 ```
 A good place to start looking for variables is the [Understanding Society Variable Search](https://www.understandingsociety.ac.uk/documentation/mainstage/dataset-documentation), and the [Documentation](https://www.understandingsociety.ac.uk/documentation).
 
+## Compiling different surveys.
+
+By default, these scripts compile the `indresp` file - you can change this with the `file` argument. For example, to compile the `youth` response files:
+
+```{r eval = FALSE}
+
+usoc_convert(usoc_directory = "spss/spss25",
+             new_directory = "rds",
+             filter_files = "youth")
+
+usoc <- usoc_compile(directory = "rds", file = "youth")
+```
+
 ## Using the data across multiple projects.
 
 Adding an environment variable called `DATA_DIRECTORY` pointing at a folder, automatically saves an fst of the final dataset, so it can be loaded from anywhere using:
 
 ```{r eval = FALSE}
 library(tidyusoc)
-usoc <- usoc_load()
+usoc <- usoc_load(file = "indresp")
 ```

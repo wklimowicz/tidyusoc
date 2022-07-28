@@ -13,6 +13,8 @@
 #' @param directory Directory with `bhps/` and `ukhls/`
 #' @param extra_mappings function with extra columns to compile
 #' @param save_variables_report Save a csv with a summary of variables?
+#' @param file Which file of the usoc data to compile? By default `indresp`,
+#' but also works on youth, child, etc.
 #'
 #' @importFrom rlang .data
 #'
@@ -20,7 +22,7 @@
 usoc_compile <- function(directory,
                          extra_mappings = NULL,
                          save_variables_report = TRUE,
-                         questionnare = "indresp") {
+                         file = "indresp") {
 
   # R CMD Check
   wave <- waveid <- NULL
@@ -33,17 +35,17 @@ usoc_compile <- function(directory,
 
     # Take only files that exist
 
-  bhps_existing <- c(paste0(bhps_directory, "/", bhps_waves, "_", questionnare, ".Rds"))
+  bhps_existing <- c(paste0(bhps_directory, "/", bhps_waves, "_", file, ".Rds"))
   bhps_waves <- bhps_waves[file.exists(bhps_existing)]
 
-  ukhls_existing <- c(paste0(ukhls_directory, "/", ukhls_waves, "_", questionnare, ".Rds"))
+  ukhls_existing <- c(paste0(ukhls_directory, "/", ukhls_waves, "_", file, ".Rds"))
   ukhls_waves <- ukhls_waves[file.exists(ukhls_existing)]
 
 
   bhps_files <- lapply(bhps_waves,
     compile_usoc_file,
     path = directory,
-    ending = questionnare,
+    ending = file,
     survey = "bhps",
     extra_mappings = extra_mappings
   )
@@ -51,7 +53,7 @@ usoc_compile <- function(directory,
   ukhls_files <- lapply(ukhls_waves,
     compile_usoc_file,
     path = directory,
-    ending = questionnare,
+    ending = file,
     survey = "ukhls",
     extra_mappings = extra_mappings
   )
@@ -80,10 +82,12 @@ usoc_compile <- function(directory,
 
     colnames(variables_report) <- c("wave", final_mapping)
 
+    save_name_mapping <- paste0("usoc_", file, "_variables_report.csv")
+
     # If file is open, give warning and continue
     tryCatch(
       {
-        readr::write_csv(variables_report, file = "usoc_variables_report.csv")
+        readr::write_csv(variables_report, file = save_name_mapping)
       },
       error = function(cond) {
         cli::cli_alert_danger("usoc_variables_report.csv is open - close it and rerun to get the report")
@@ -115,11 +119,16 @@ usoc_compile <- function(directory,
                     waveid = factor(waveid, levels = wave_year_mapping$waveid, ordered = TRUE)
                     )]
 
+
+  # Give the file the file name
+
+    save_name <- paste0("usoc_", file, "_data.fst")
+
   # If DATA_DIRECTORY environment variable is present, save there.
   if (Sys.getenv("DATA_DIRECTORY") != "") {
     fst::write_fst(
       usoc_files,
-      paste0(Sys.getenv("DATA_DIRECTORY"), "/usoc_data.fst")
+      paste0(Sys.getenv("DATA_DIRECTORY"), "/", save_name)
     )
 
     cli::cli_alert_info("DATA_DIRECTORY environment variable set - saving in folder")

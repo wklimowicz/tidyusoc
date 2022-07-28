@@ -487,14 +487,14 @@ test_that("Converting and compiling runs succesfully", {
 
 
   test_convert_compile <- function() {
-    
+
     withr::local_envvar(DATA_DIRECTORY = ".")
 
     usoc_convert("test", "test_rds_data/")
 
     usoc_compile("test_rds_data")
 
-    fst::read_fst("usoc_data.fst")
+    usoc_load()
   }
 
 
@@ -506,8 +506,8 @@ test_that("Converting and compiling runs succesfully", {
     fs::dir_create("test_rds_data/bhps"),
     "test/bhps/ba_indresp.sav" = haven::write_sav(test_data, "test/bhps/ba_indresp.sav"),
     "test/ukhls/a_indresp.sav" = haven::write_sav(test_data, "test/ukhls/a_indresp.sav"),
-    "usoc_data.fst",
-    "usoc_variables_report.csv"
+    "usoc_indresp_data.fst",
+    "usoc_indresp_variables_report.csv"
   ), {
     expect_error(suppressMessages(test_convert_compile()), NA)
   })

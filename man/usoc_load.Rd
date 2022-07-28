@@ -4,9 +4,11 @@
 \alias{usoc_load}
 \title{Load USOC from DATA_DIRECTORY folder}
 \usage{
-usoc_load(as.data.table = TRUE, ...)
+usoc_load(file = "indresp", as.data.table = TRUE, ...)
 }
 \arguments{
+\item{file}{Which file to load? By default indresp.}
+
 \item{as.data.table}{Passed to read_fst}
 
 \item{...}{Passed to fst::read_fst}
