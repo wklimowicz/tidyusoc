@@ -36,7 +36,10 @@ user_extra_mappings <- function(usoc_file_column_names) {
 
 usoc <- usoc_compile("../rds",
                      extra_mappings = user_extra_mappings,
-                     file = "income")
+                     file = "indresp")
+
+usoc <- usoc_compile("../rds",
+                     file = "indresp")
 
 
 

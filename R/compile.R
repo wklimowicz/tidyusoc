@@ -201,7 +201,7 @@ compile_usoc_file <- function(wave, ending, survey, path, extra_mappings) {
   # Convert all to factor to retain labels,
   df3 <- df3 %>%
     dplyr::mutate(dplyr::across(
-      -.data$pidp,
+      any_of(c(factor_variables, numeric_variables)),
       haven::as_factor
     ))
 
@@ -217,6 +217,14 @@ compile_usoc_file <- function(wave, ending, survey, path, extra_mappings) {
           as.character() |>
           as.numeric()
       ))
+      # dplyr::mutate(dplyr::across(
+      #   dplyr::any_of(character_variables),
+      #   ~ .x |>
+      #     as.character()
+      # )
+      # )
+
+
   })
 
   return(list(df3, complete_mappings))
