@@ -8,7 +8,7 @@ devtools::load_all()
 
 usoc_convert("../spss/spss25",
              "../rds",
-             filter_files = "income")
+             filter_files = "child")
 
 
 user_extra_mappings <- function(usoc_file_column_names) {
@@ -26,9 +26,9 @@ user_extra_mappings <- function(usoc_file_column_names) {
 
   custom_variables <- tibble::tribble(
     ~usoc_name,       ~new_name,     ~type,
-    # "scghql", "scghql", "factor",
-    # "sclfsat2", "sclfsat2", "factor",
-    life_sat, "lfsato", "factor"
+    "hidp", "hidp", "numeric",
+    "nchild_dv", "nchild_dv", "numeric",
+    "ch1by4", "ch1by4", "factor"
     )
 
   return(custom_variables)

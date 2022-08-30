@@ -190,10 +190,10 @@ compile_usoc_file <- function(wave, ending, survey, path, extra_mappings) {
   numeric_variables <- ifelse(complete_mappings$type == "numeric", complete_mappings$new_name, NA)
   numeric_variables <- numeric_variables[!is.na(numeric_variables)]
 
+  character_variables <- ifelse(complete_mappings$type == "character", complete_mappings$new_name, NA)
+  character_variables <- character_variables[!is.na(character_variables)]
 
   # Not used currently
-  # character_variables <- ifelse(complete_mappings$type == "character", complete_mappings$new_name, NA)
-  # character_variables <- character_variables[!is.na(character_variables)]
   # unlabelled_factor_variables <- ifelse(complete_mappings$type == "unlabelled_factor", complete_mappings$new_name, NA)
   # unlabelled_factor_variables <- unlabelled_factor_variables[!is.na(unlabelled_factor_variables)]
 
@@ -201,7 +201,7 @@ compile_usoc_file <- function(wave, ending, survey, path, extra_mappings) {
   # Convert all to factor to retain labels,
   df3 <- df3 %>%
     dplyr::mutate(dplyr::across(
-      any_of(c(factor_variables, numeric_variables)),
+      dplyr::any_of(c(factor_variables, numeric_variables)),
       haven::as_factor
     ))
 
