@@ -168,6 +168,10 @@ compile_usoc_file <- function(wave, ending, survey, path, extra_mappings) {
     vars_extra <- vars_extra %>%
       dplyr::mutate(usoc_name = ifelse(.data$usoc_name %in% cols, .data$usoc_name, NA))
 
+    # Remove existing mappings if overwritten
+    complete_mappings <- complete_mappings %>%
+      dplyr::filter(!.data$new_name %in% vars_extra[[2]])
+
     complete_mappings <- dplyr::bind_rows(complete_mappings, vars_extra)
   }
 
