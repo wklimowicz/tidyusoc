@@ -4,7 +4,12 @@
 \alias{usoc_compile}
 \title{Compile Understanding Society SPSS files to one dataset}
 \usage{
-usoc_compile(directory, extra_mappings = NULL, save_variables_report = TRUE)
+usoc_compile(
+  directory,
+  extra_mappings = NULL,
+  save_variables_report = TRUE,
+  file = "indresp"
+)
 }
 \arguments{
 \item{directory}{Directory with \verb{bhps/} and \verb{ukhls/}}
@@ -12,6 +17,9 @@ usoc_compile(directory, extra_mappings = NULL, save_variables_report = TRUE)
 \item{extra_mappings}{function with extra columns to compile}
 
 \item{save_variables_report}{Save a csv with a summary of variables?}
+
+\item{file}{Which file of the usoc data to compile? By default \code{indresp},
+but also works on youth, child, etc.}
 }
 \description{
 Compiles all files from BHPS and UKHLS into one file

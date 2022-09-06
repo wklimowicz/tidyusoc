@@ -6,7 +6,9 @@ setwd(here::here())
 devtools::load_all()
 
 
-usoc_convert("../spss/spss25", "../rds", filter_files = "indresp")
+usoc_convert("../spss/spss25",
+             "../rds",
+             filter_files = "child")
 
 
 user_extra_mappings <- function(usoc_file_column_names) {
@@ -20,17 +22,39 @@ user_extra_mappings <- function(usoc_file_column_names) {
     # "paedqf", "paedqf", "factor",
     # "pasoc00_cc", "pasoc00_cc", "factor",
 
+    life_sat <- pick(c("sclfsato", "lfsato"), usoc_file_column_names)
+
   custom_variables <- tibble::tribble(
     ~usoc_name,       ~new_name,     ~type,
-    "scghql", "scghql", "factor",
-    "sclfsat2", "sclfsat2", "factor"
+    "hidp", "hidp", "numeric",
+    "nchild_dv", "nchild_dv", "numeric",
+    "ch1by4", "ch1by4", "factor"
     )
 
   return(custom_variables)
 }
 
-usoc <- usoc_compile("../rds", extra_mappings = user_extra_mappings)
-usoc <- usoc_compile("../rds", extra_mappings = NULL)
+usoc <- usoc_compile("../rds",
+                     extra_mappings = user_extra_mappings,
+                     file = "indresp")
+
+usoc <- usoc_compile("../rds",
+                     file = "indresp")
+
+
+
+youth_extra_mappings <- function(usoc_file_column_names) {
+
+  custom_variables <- tibble::tribble(
+    ~usoc_name,       ~new_name,     ~type,
+    "yptcha", "yptcha", "factor"
+    )
+
+  return(custom_variables)
+
+}
+
+usoc <- usoc_compile("../rds", extra_mappings = youth_extra_mappings, file = "youth")
 
 usoc <- usoc_load()
 

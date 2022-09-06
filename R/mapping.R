@@ -32,6 +32,8 @@ usoc_default_mappings <- function(cols) {
     ~usoc_name, ~new_name, ~type,
     # ID Variables --------------------
     "pidp", "pidp", "numeric",
+    "hidp", "hidp", "numeric",
+    "pno", "pno", "numeric",
     sex, "sex", "factor",
     age, "age", "numeric",
     race, "race", "factor",

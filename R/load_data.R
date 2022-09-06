@@ -4,11 +4,12 @@
 #' set an environment variable called `DATA_DIRECTORY` with a folder path,
 #' and use this function to load the data in.
 #'
+#' @param file Which file to load? By default indresp.
 #' @param as.data.table Passed to read_fst
 #' @param ... Passed to fst::read_fst
 #'
 #' @export
-usoc_load <- function(as.data.table = TRUE, ...) {
+usoc_load <- function(file = "indresp", as.data.table = TRUE, ...) {
 
   # Check if DATA_DIRECTORY environment variable is present
   if (Sys.getenv("DATA_DIRECTORY") == "") {
@@ -17,7 +18,9 @@ usoc_load <- function(as.data.table = TRUE, ...) {
     stop()
   }
 
-  fst::read_fst(paste0(Sys.getenv("DATA_DIRECTORY"), "/usoc_data.fst"),
+    read_name <- paste0("usoc_", file, "_data.fst")
+
+  fst::read_fst(paste0(Sys.getenv("DATA_DIRECTORY"), "/", read_name),
     as.data.table = as.data.table,
     ...
   )

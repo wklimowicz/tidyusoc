@@ -52,10 +52,10 @@ A small set of core variables is included by default:
 | fimnlabgrs_dv | Labour Income                                |
 
 To add more variables, use the `extra_mappings` function. For variables
-that change over time use `pick`. For example, number of A-Level’s is:
+that change over time use `pick`. For example, life satisfaction is:
 
--   `qnqfedj` in waves BH1 to BH18
--   `alevel` in waves 9 to 11
+-   `lfsato` in waves 6-10 and 12-18 of the BHPS.
+-   `sclfsato` in waves 1-11 of the UKHLS.
 
 The variable BMI (`bmi_dv`) doesn’t change over time, so it’s passed as
 a string.
@@ -63,11 +63,11 @@ a string.
 ``` r
 custom_mappings <- function(cols) {
 
-    alevels <- pick(c("nqfedj", "alevel"), cols)
+    life_sat <- pick(c("sclfsato", "lfsato"), cols)
 
     custom_variables <- tibble::tribble(
         ~usoc_name, ~new_name, ~type,
-        alevels, "alevels", "factor",
+        life_sat, "life_satisfaction", "factor",
         "bmi_dv", "bmi_dv", "numeric"
     )
 
@@ -84,6 +84,20 @@ Search](https://www.understandingsociety.ac.uk/documentation/mainstage/dataset-d
 and the
 [Documentation](https://www.understandingsociety.ac.uk/documentation).
 
+## Compiling different surveys.
+
+By default, these scripts compile the `indresp` file - you can change
+this with the `file` argument. For example, to compile the `youth`
+response files:
+
+``` r
+usoc_convert(usoc_directory = "spss/spss25",
+             new_directory = "rds",
+             filter_files = "youth")
+
+usoc <- usoc_compile(directory = "rds", file = "youth")
+```
+
 ## Using the data across multiple projects.
 
 Adding an environment variable called `DATA_DIRECTORY` pointing at a
@@ -93,4 +107,10 @@ loaded from anywhere using:
 ``` r
 library(tidyusoc)
 usoc <- usoc_load()
+```
+
+To read any of the other compiled files change the argument:
+
+``` r
+usoc <- usoc_load(file = "youth")
 ```
