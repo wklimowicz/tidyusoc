@@ -8,6 +8,7 @@ usoc_compile(
   directory,
   extra_mappings = NULL,
   save_variables_report = TRUE,
+  save_to_folder = FALSE,
   file = "indresp"
 )
 }
@@ -17,6 +18,8 @@ usoc_compile(
 \item{extra_mappings}{function with extra columns to compile}
 
 \item{save_variables_report}{Save a csv with a summary of variables?}
+
+\item{save_to_folder}{If TRUE, will save to the \code{DATA_DIRECTORY} environment variable if present}
 
 \item{file}{Which file of the usoc data to compile? By default \code{indresp},
 but also works on youth, child, etc.}

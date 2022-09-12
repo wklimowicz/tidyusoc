@@ -13,6 +13,7 @@
 #' @param directory Directory with `bhps/` and `ukhls/`
 #' @param extra_mappings function with extra columns to compile
 #' @param save_variables_report Save a csv with a summary of variables?
+#' @param save_to_folder If TRUE, will save to the `DATA_DIRECTORY` environment variable if present
 #' @param file Which file of the usoc data to compile? By default `indresp`,
 #' but also works on youth, child, etc.
 #'
@@ -22,6 +23,7 @@
 usoc_compile <- function(directory,
                          extra_mappings = NULL,
                          save_variables_report = TRUE,
+                         save_to_folder = FALSE,
                          file = "indresp") {
 
   # R CMD Check
@@ -124,6 +126,9 @@ usoc_compile <- function(directory,
 
     save_name <- paste0("usoc_", file, "_data.fst")
 
+ # If enabled
+  if (save_to_folder == TRUE) {
+
   # If DATA_DIRECTORY environment variable is present, save there.
   if (Sys.getenv("DATA_DIRECTORY") != "") {
     fst::write_fst(
@@ -132,6 +137,8 @@ usoc_compile <- function(directory,
     )
 
     cli::cli_alert_info("DATA_DIRECTORY environment variable set - saving in folder")
+  }
+
   }
 
   return(usoc_files)

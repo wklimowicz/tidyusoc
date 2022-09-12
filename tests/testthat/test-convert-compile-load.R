@@ -492,7 +492,7 @@ test_that("Converting and compiling runs succesfully", {
 
     usoc_convert("test", "test_rds_data/")
 
-    usoc_compile("test_rds_data")
+    usoc_compile("test_rds_data", save_to_folder = TRUE)
 
     usoc_load()
   }
