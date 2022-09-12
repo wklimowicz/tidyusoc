@@ -179,11 +179,14 @@
 <div class="section level2">
 <h2 id="using-the-data-across-multiple-projects">Using the data across multiple projects.<a class="anchor" aria-label="anchor" href="#using-the-data-across-multiple-projects"></a>
 </h2>
-<p>Adding an environment variable called <code>DATA_DIRECTORY</code> pointing at a folder, automatically saves an fst of the final dataset, so it can be loaded from anywhere using:</p>
+<p>Adding an environment variable called <code>DATA_DIRECTORY</code> pointing at a folder, and using the <code>save_to_folder</code> argument saves an fst of the final dataset, so it can be loaded from anywhere.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/wklimowicz/tidyusoc" class="external-link">tidyusoc</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/usoc_compile.html">usoc_compile</a></span><span class="op">(</span>directory <span class="op">=</span> <span class="st">"rds"</span>, save_to_folder <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">usoc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/usoc_load.html">usoc_load</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>To read any of the other compiled files change the argument:</p>
+<p>To read any of the other compiled files change the <code>file</code> argument:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">usoc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/usoc_load.html">usoc_load</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"youth"</span><span class="op">)</span></span></code></pre></div>
 </div>
