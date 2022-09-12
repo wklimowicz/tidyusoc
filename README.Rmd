@@ -105,14 +105,17 @@ usoc <- usoc_compile(directory = "rds", file = "youth")
 
 ## Using the data across multiple projects.
 
-Adding an environment variable called `DATA_DIRECTORY` pointing at a folder, automatically saves an fst of the final dataset, so it can be loaded from anywhere using:
+Adding an environment variable called `DATA_DIRECTORY` pointing at a folder, and using the `save_to_folder` argument saves an fst of the final dataset, so it can be loaded from anywhere.
 
 ```{r eval = FALSE}
 library(tidyusoc)
+
+usoc_compile(directory = "rds", save_to_folder = TRUE)
+
 usoc <- usoc_load()
 ```
 
-To read any of the other compiled files change the argument:
+To read any of the other compiled files change the `file` argument:
 
 ```{r eval = FALSE}
 usoc <- usoc_load(file = "youth")
