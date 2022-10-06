@@ -121,9 +121,11 @@ usoc_compile <- function(directory,
                     waveid = factor(waveid, levels = wave_year_mapping$waveid, ordered = TRUE)
                     )]
 
+ usoc_files %>%
+  annotate_jbsoc00_cc()
+
 
   # Give the file the file name
-
     save_name <- paste0("usoc_", file, "_data.fst")
 
  # If enabled

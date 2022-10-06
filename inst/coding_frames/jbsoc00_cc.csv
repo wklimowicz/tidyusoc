@@ -1,0 +1,87 @@
+jbsoc00_cc,jbsoc_description
+-9,missing
+-8,inapplicable
+-7,proxy respondent
+-2,refused
+-1,don't know
+111,Corporate managers and senior officials
+112,Production managers
+113,Functional managers
+114,Quality and customer care managers
+115,Financial institution and office managers
+116,"Managers in distribution, storage and retailing"
+117,Protective service officers
+118,Health and social services managers
+121,"Managers in farming, horticulture, forestry and services"
+122,Managers and proprietors in hospitality and leisure services
+123,Managers and proprietors in other service industries
+211,Science professionals
+212,Engineering professionals
+213,Information and communication technology professionals
+221,Health professionals
+231,Teaching professionals
+232,Research professionals
+241,Legal professionals
+242,Business and statistical professionals
+243,"Architects, town planners, surveyors"
+244,Public service professionals
+245,Librarians and related professionals
+311,Science and engineering technicians
+312,Draughtspersons and building inspectors
+313,It service delivery occupations
+321,Health associate professionals
+322,Therapists
+323,Social welfare associate professionals
+331,Protective service occupations
+341,Artistic and literary occupations
+342,Design associate professionals
+343,Media associate professionals
+344,Sports and fitness occupations
+351,Transport associate professionals
+352,Legal associate professionals
+353,Business and finance associate professionals
+354,Sales and related associate professionals
+355,Conservation associate professionals
+356,Public service and other associate professionals
+411,Administrative occupations: government and related organisations
+412,Administrative occupations: finance
+413,Administrative occupations: records
+414,Administrative occupations: communications
+415,Administrative occupations: general
+421,Secretarial and related occupations
+511,Agricultural trades
+521,"Metal forming, welding and related trades"
+522,"Metal machining, fitting and instrument making trades"
+523,Vehicle trades
+524,Electrical trades
+531,Construction trades
+532,Building trades
+541,Textiles and garments trades
+542,Printing trades
+543,Food preparation trades
+549,Skilled trades nec
+611,Healthcare and related personal services
+612,Childcare and related personal services
+613,Animal care services
+621,Leisure and travel service occupations
+622,Hairdressers and related occupations
+623,Housekeeping occupations
+629,Personal services occupations nec
+711,Sales assistants and retail cashiers
+712,Sales related occupations
+721,Customer service occupations
+811,Process operatives
+812,Plant and machine operatives
+813,Assemblers and routine operatives
+814,Construction operatives
+821,Transport drivers and operatives
+822,Mobile machine drivers and operatives
+911,Elementary agricultural occupations
+912,Elementary construction occupations
+913,Elementary process plant occupations
+914,Elementary goods storage occupations
+921,Elementary administration occupations
+922,Elementary personal services occupations
+923,Elementary cleaning occupations
+924,Elementary security occupations
+925,Elementary sales occupations
