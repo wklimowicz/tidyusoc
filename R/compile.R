@@ -121,9 +121,25 @@ usoc_compile <- function(directory,
                     waveid = factor(waveid, levels = wave_year_mapping$waveid, ordered = TRUE)
                     )]
 
- usoc_files %>%
-  annotate_jbsoc00_cc()
 
+ # File level annotations
+
+ if (file == "indresp") {
+
+   usoc_files %>%
+    annotate_jbstat()
+
+   if ("jbsoc90_cc" %in% names(usoc_files)) {
+     usoc_files %>%
+      annotate_jbsoc_cc("jbsoc90_cc")
+   }
+
+   if ("jbsoc00_cc" %in% names(usoc_files)) {
+     usoc_files %>%
+      annotate_jbsoc_cc("jbsoc00_cc")
+   }
+
+ }
 
   # Give the file the file name
     save_name <- paste0("usoc_", file, "_data.fst")
@@ -229,13 +245,13 @@ compile_usoc_file <- function(wave, ending, survey, path, extra_mappings) {
         ~ .x |>
           as.character() |>
           as.numeric()
-      ))
-      # dplyr::mutate(dplyr::across(
-      #   dplyr::any_of(character_variables),
-      #   ~ .x |>
-      #     as.character()
-      # )
-      # )
+      )) %>%
+      dplyr::mutate(dplyr::across(
+        dplyr::any_of(character_variables),
+        ~ .x |>
+          as.character()
+      )
+      )
 
 
   })

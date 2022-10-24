@@ -34,9 +34,27 @@ user_extra_mappings <- function(usoc_file_column_names) {
   return(custom_variables)
 }
 
-usoc <- usoc_compile("../rds",
+indresp <- usoc_compile("../rds",
                      extra_mappings = user_extra_mappings,
                      file = "indresp")
+
+# indresp[!is.na(jbsoc90_cc), .N, wave]
+
+# indresp[!is.na(jbsoc90_cc), .N, waveid]
+# indresp[!is.na(jbsoc00_cc), .N, wave]
+
+# indresp[!is.na(jbsoc_description), .N, wave]
+
+# indresp[, .N, jbsoc90_cc]
+
+# indresp[!is.na(jbsoc00_cc), .N, waveid]
+# indresp[!is.na(jbsoc_description), .N, waveid]
+
+# indresp[jbsoc00_cc == 231, .N, waveid]
+
+# indresp[jbsoc90_cc == 231, .N, wave]
+# indresp[jbsoc00_cc == 231, .N, waveid]
+# indresp[jbsoc10_cc == 231, .N, wave]
 
 usoc <- usoc_compile("../rds",
                      file = "indresp")

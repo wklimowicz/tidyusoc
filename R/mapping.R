@@ -42,7 +42,9 @@ usoc_default_mappings <- function(cols) {
     "qfhigh_dv", "qfhigh_dv", "factor",
     "hiqual_dv", "hiqual_dv", "factor",
     "jbstat", "jbstat", "factor",
-    "jbsoc00_cc", "jbsoc00_cc", "numeric",
+    "jbsoc90_cc", "jbsoc90_cc", "character",
+    "jbsoc00_cc", "jbsoc00_cc", "character",
+    "jbsoc10_cc", "jbsoc10_cc", "character",
     industry, "industry", "factor",
     "fimnlabgrs_dv", "fimnlabgrs_dv", "numeric",
   )
