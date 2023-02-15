@@ -26,7 +26,13 @@ user_extra_mappings <- function(usoc_file_column_names) {
     ~usoc_name,       ~new_name,     ~type,
     "hidp", "hidp", "numeric",
     "nchild_dv", "nchild_dv", "numeric",
-    "ch1by4", "ch1by4", "factor"
+    "ch1by4", "ch1by4", "factor",
+    "basrate", "basrate", "numeric",
+    "ccare",     "ccare",    "factor",
+    "mlrnot3",   "mlrnot3",  "factor",
+    "xpchc",     "xpchc",    "factor",
+    "jbft_dv",   "jbft_dv",  "factor", #  Full  time  or  part  time
+    "jbsoc10_cc",   "jbsoc10_cc",  "factor"
     )
 
   return(custom_variables)
