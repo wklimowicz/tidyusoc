@@ -13,24 +13,30 @@ convert_save_file <- function(original_file_path, save_file_path) {
 #'
 #' @param usoc_directory Directory of top level USOC data (where "bhps" and "ukhls" are)
 #' @param new_directory Directory where RDS files will be saved
-#' @param filter_files regex to narrow files - by default
+#' @param incremental Only convert files that don't already exist in output
+#' @param filter_files regex to narrow files, e.g. "indresp"
 #'
 #' @export
-usoc_convert <- function(usoc_directory, new_directory, filter_files = "indresp") {
+usoc_convert <- function(usoc_directory,
+                         new_directory,
+                         incremental = TRUE,
+                         filter_files = NULL) {
 
   cli::cli_h1("Converting BHPS")
 
   usoc_convert_directory(paste0(usoc_directory, "/bhps"),
     paste0(new_directory, "/bhps"),
     new_directory,
-    filter_files = filter_files
+    filter_files = filter_files,
+    incremental = incremental
   )
 
   cli::cli_h1("Converting UKHLS")
   usoc_convert_directory(paste0(usoc_directory, "/ukhls"),
     paste0(new_directory, "/ukhls"),
     new_directory,
-    filter_files = filter_files
+    filter_files = filter_files,
+    incremental = incremental
   )
 
   # Print complete message
@@ -40,18 +46,37 @@ usoc_convert <- function(usoc_directory, new_directory, filter_files = "indresp"
 }
 
 
-
-
-
-
-
 #' @importFrom rlang .data
 #' @importFrom haven labelled
-usoc_convert_directory <- function(usoc_directory, output_directory, top_level_dir, filter_files = NULL) {
+usoc_convert_directory <- function(usoc_directory,
+                                   output_directory,
+                                   top_level_dir,
+                                   incremental,
+                                   filter_files) {
+  . <- NULL # Fix R CMD Check
 
   files_in_directory <- list.files(usoc_directory)
 
-  . <- NULL # Fix R CMD Check
+  if (incremental == TRUE) {
+    
+    # Exclude files already present in output
+    files_in_directory_no_ext <- list.files(usoc_directory) |>
+    tools::file_path_sans_ext()
+
+    files_in_new_directory_no_ext <- list.files(output_directory) |>
+    tools::file_path_sans_ext()
+
+    files_in_directory <- files_in_directory[!files_in_directory_no_ext %in% files_in_new_directory_no_ext]
+
+    if (length(files_in_directory) == 0) {
+
+      cli::cli_alert_danger("No New Files Found - set `incremental = FALSE` if you want to reconvert existing files")
+
+      return()
+
+    }
+
+  }
 
   if (!is.null(filter_files)) {
     files_in_directory <- files_in_directory %>%
@@ -68,7 +93,6 @@ usoc_convert_directory <- function(usoc_directory, output_directory, top_level_d
   dir.create(file.path(output_directory), showWarnings = FALSE)
 
   cli::cli_alert_info("Found {length(files_in_directory)} file{?s} in directory")
-
 
   correct_file_index <- stringr::str_detect(
     files_in_directory,

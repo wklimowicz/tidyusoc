@@ -7,9 +7,7 @@ devtools::load_all()
 
 
 usoc_convert("../spss/spss25",
-             "../rds",
-             filter_files = "child")
-
+             "../rds")
 
 user_extra_mappings <- function(usoc_file_column_names) {
 
@@ -36,6 +34,7 @@ user_extra_mappings <- function(usoc_file_column_names) {
 
 indresp <- usoc_compile("../rds",
                      extra_mappings = user_extra_mappings,
+                     save_to_folder = TRUE,
                      file = "indresp")
 
 # indresp[!is.na(jbsoc90_cc), .N, wave]
