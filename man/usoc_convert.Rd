@@ -4,14 +4,21 @@
 \alias{usoc_convert}
 \title{Convert USOC files to RDS}
 \usage{
-usoc_convert(usoc_directory, new_directory, filter_files = "indresp")
+usoc_convert(
+  usoc_directory,
+  new_directory,
+  incremental = TRUE,
+  filter_files = NULL
+)
 }
 \arguments{
 \item{usoc_directory}{Directory of top level USOC data (where "bhps" and "ukhls" are)}
 
 \item{new_directory}{Directory where RDS files will be saved}
 
-\item{filter_files}{regex to narrow files - by default}
+\item{incremental}{Only convert files that don't already exist in output}
+
+\item{filter_files}{regex to narrow files, e.g. "indresp"}
 }
 \description{
 Convert USOC files to RDS
