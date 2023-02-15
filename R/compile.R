@@ -17,6 +17,8 @@
 #' @param file Which file of the usoc data to compile? By default `indresp`,
 #' but also works on youth, child, etc.
 #'
+#' @importFrom rlang .data
+#'
 #' @export
 usoc_compile <- function(directory,
                          extra_mappings = NULL,
@@ -78,7 +80,7 @@ usoc_compile <- function(directory,
 
     variables_report <- variables_report %>%
       dplyr::mutate(wave = row.names(variables_report)) %>%
-      dplyr::relocate("wave")
+      dplyr::relocate(.data$wave)
 
     colnames(variables_report) <- c("wave", final_mapping)
 
@@ -191,11 +193,11 @@ compile_usoc_file <- function(wave, ending, survey, path, extra_mappings) {
     vars_extra <- extra_mappings(cols)
 
     vars_extra <- vars_extra %>%
-      dplyr::mutate(usoc_name = ifelse("usoc_name" %in% cols, "usoc_name", NA))
+      dplyr::mutate(usoc_name = ifelse(.data$usoc_name %in% cols, .data$usoc_name, NA))
 
     # Remove existing mappings if overwritten
     complete_mappings <- complete_mappings %>%
-      dplyr::filter(!"new_name" %in% vars_extra[[2]])
+      dplyr::filter(!.data$new_name %in% vars_extra[[2]])
 
     complete_mappings <- dplyr::bind_rows(complete_mappings, vars_extra)
   }
