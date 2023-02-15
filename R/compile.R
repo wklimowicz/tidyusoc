@@ -113,8 +113,10 @@ usoc_compile <- function(directory,
     sort = FALSE
   )
 
+  main_vars <- c("wave", "waveid", "year", "pidp")
+  main_vars <- main_vars[main_vars %in% names(usoc_files)]
   # Reorder columns
-  data.table::setcolorder(usoc_files, c("wave", "waveid", "year", "pidp"))
+  data.table::setcolorder(usoc_files, main_vars)
 
  usoc_files[, `:=`(
                     wave = factor(wave, levels = wave_letter, ordered = TRUE),
