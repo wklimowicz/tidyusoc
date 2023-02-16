@@ -24,7 +24,6 @@ user_extra_mappings <- function(usoc_file_column_names) {
 
   custom_variables <- tibble::tribble(
     ~usoc_name,       ~new_name,     ~type,
-    "hidp", "hidp", "numeric",
     "nchild_dv", "nchild_dv", "numeric",
     "ch1by4", "ch1by4", "factor",
     "basrate", "basrate", "numeric",
@@ -60,6 +59,35 @@ indresp <- usoc_compile("../rds",
 # indresp[jbsoc90_cc == 231, .N, wave]
 # indresp[jbsoc00_cc == 231, .N, waveid]
 # indresp[jbsoc10_cc == 231, .N, wave]
+
+
+# HHRESP --------------------------------
+
+user_extra_mappings <- function(usoc_file_column_names) {
+
+
+  custom_variables <- tibble::tribble(
+    ~usoc_name,       ~new_name,     ~type,
+    "intdated", "intdated", "character",
+    )
+
+  return(custom_variables)
+}
+
+hhresp <- usoc_compile("../rds",
+                     extra_mappings = user_extra_mappings,
+                     save_to_folder = TRUE,
+                     file = "hhresp")
+
+
+
+
+
+
+
+
+
+
 
 usoc <- usoc_compile("../rds",
                      file = "indresp")
