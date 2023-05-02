@@ -52,18 +52,19 @@ A small set of core variables is included by default:
 | fimnlabgrs_dv | Labour Income                                |
 
 To add more variables, use the `extra_mappings` function. For variables
-that change over time use `pick`. For example, life satisfaction is:
+that change over time use `pick_var`. For example, life satisfaction is:
 
--   `lfsato` in waves 6-10 and 12-18 of the BHPS.
--   `sclfsato` in waves 1-11 of the UKHLS.
+- `lfsato` in waves 6-10 and 12-18 of the BHPS.
+- `sclfsato` in waves 1-11 of the UKHLS.
 
 The variable BMI (`bmi_dv`) doesn’t change over time, so it’s passed as
 a string.
 
 ``` r
+
 custom_mappings <- function(cols) {
 
-    life_sat <- pick(c("sclfsato", "lfsato"), cols)
+    life_sat <- pick_var(c("sclfsato", "lfsato"), cols)
 
     custom_variables <- tibble::tribble(
         ~usoc_name, ~new_name, ~type,
@@ -91,6 +92,7 @@ this with the `file` argument. For example, to compile the `youth`
 response files:
 
 ``` r
+
 usoc_convert(usoc_directory = "spss/spss25",
              new_directory = "rds",
              filter_files = "youth")

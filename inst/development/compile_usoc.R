@@ -1,9 +1,9 @@
-library(tidyverse)
 library(data.table)
 library(tictoc)
 library(haven)
 setwd(here::here())
 devtools::load_all()
+library(tidyverse)
 
 
 usoc_convert("../spss/spss25",
@@ -20,7 +20,7 @@ user_extra_mappings <- function(usoc_file_column_names) {
     # "paedqf", "paedqf", "factor",
     # "pasoc00_cc", "pasoc00_cc", "factor",
 
-    life_sat <- pick(c("sclfsato", "lfsato"), usoc_file_column_names)
+    life_sat <- pick_var(c("sclfsato", "lfsato"), usoc_file_column_names)
 
   custom_variables <- tibble::tribble(
     ~usoc_name,       ~new_name,     ~type,
@@ -31,7 +31,8 @@ user_extra_mappings <- function(usoc_file_column_names) {
     "mlrnot3",   "mlrnot3",  "factor",
     "xpchc",     "xpchc",    "factor",
     "jbft_dv",   "jbft_dv",  "factor", #  Full  time  or  part  time
-    "jbsoc10_cc",   "jbsoc10_cc",  "factor"
+    "jbsoc10_cc",   "jbsoc10_cc",  "factor",
+    life_sat, "lifesat", "factor"
     )
 
   return(custom_variables)

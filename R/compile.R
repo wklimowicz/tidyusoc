@@ -80,7 +80,7 @@ usoc_compile <- function(directory,
 
     variables_report <- variables_report %>%
       dplyr::mutate(wave = row.names(variables_report)) %>%
-      dplyr::relocate(.data$wave)
+      dplyr::relocate("wave")
 
     colnames(variables_report) <- c("wave", final_mapping)
 
