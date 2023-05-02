@@ -140,7 +140,7 @@
 </tr>
 </tbody>
 </table>
-<p>To add more variables, use the <code>extra_mappings</code> function. For variables that change over time use <code>pick</code>. For example, life satisfaction is:</p>
+<p>To add more variables, use the <code>extra_mappings</code> function. For variables that change over time use <code>pick_var</code>. For example, life satisfaction is:</p>
 <ul>
 <li>
 <code>lfsato</code> in waves 6-10 and 12-18 of the BHPS.</li>
@@ -149,9 +149,10 @@
 </ul>
 <p>The variable BMI (<code>bmi_dv</code>) doesn’t change over time, so it’s passed as a string.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">custom_mappings</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">cols</span><span class="op">)</span> <span class="op">{</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="va">custom_mappings</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">cols</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
-<span>    <span class="va">life_sat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pick.html">pick</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sclfsato"</span>, <span class="st">"lfsato"</span><span class="op">)</span>, <span class="va">cols</span><span class="op">)</span></span>
+<span>    <span class="va">life_sat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pick_var.html">pick_var</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sclfsato"</span>, <span class="st">"lfsato"</span><span class="op">)</span>, <span class="va">cols</span><span class="op">)</span></span>
 <span></span>
 <span>    <span class="va">custom_variables</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
 <span>        <span class="op">~</span><span class="va">usoc_name</span>, <span class="op">~</span><span class="va">new_name</span>, <span class="op">~</span><span class="va">type</span>,</span>
@@ -171,7 +172,8 @@
 </h2>
 <p>By default, these scripts compile the <code>indresp</code> file - you can change this with the <code>file</code> argument. For example, to compile the <code>youth</code> response files:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/usoc_convert.html">usoc_convert</a></span><span class="op">(</span>usoc_directory <span class="op">=</span> <span class="st">"spss/spss25"</span>,</span>
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="reference/usoc_convert.html">usoc_convert</a></span><span class="op">(</span>usoc_directory <span class="op">=</span> <span class="st">"spss/spss25"</span>,</span>
 <span>             new_directory <span class="op">=</span> <span class="st">"rds"</span>,</span>
 <span>             filter_files <span class="op">=</span> <span class="st">"youth"</span><span class="op">)</span></span>
 <span></span>
