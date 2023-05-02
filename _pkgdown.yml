@@ -17,7 +17,7 @@ reference:
 - subtitle: Add custom columns
   desc: Brings in extra columns
   contents:
-  - pick
+  - pick_var
 
 navbar:
   structure:

@@ -10,7 +10,7 @@
 #' @return First name that appears in cols
 #'
 #' @export
-pick <- function(vector_of_names, column_names) {
+pick_var <- function(vector_of_names, column_names) {
   index <- vector_of_names %in% column_names
 
   if (sum(index) > 0) {
@@ -23,10 +23,10 @@ pick <- function(vector_of_names, column_names) {
 
 usoc_default_mappings <- function(cols) {
 
-  age <- pick(c("age", "age_dv"), cols)
-  sex <- pick(c("sex", "sex_dv"), cols)
-  race <- pick(c("race", "racel_dv"), cols)
-  industry <- pick(c("jbsic", "jbsic07_cc"), cols)
+  age <- pick_var(c("age", "age_dv"), cols)
+  sex <- pick_var(c("sex", "sex_dv"), cols)
+  race <- pick_var(c("race", "racel_dv"), cols)
+  industry <- pick_var(c("jbsic", "jbsic07_cc"), cols)
 
   variables <- tibble::tribble(
     ~usoc_name, ~new_name, ~type,
