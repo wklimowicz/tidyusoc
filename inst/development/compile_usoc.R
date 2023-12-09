@@ -6,8 +6,11 @@ devtools::load_all()
 library(tidyverse)
 
 
-usoc_convert("../spss/spss25",
-             "../rds")
+usoc_convert("../usoc_raw_data/spss25",
+             "../usoc_rds_data/",
+incremental = TRUE,
+filter_files = "indresp"
+)
 
 user_extra_mappings <- function(usoc_file_column_names) {
 
@@ -38,10 +41,14 @@ user_extra_mappings <- function(usoc_file_column_names) {
   return(custom_variables)
 }
 
-indresp <- usoc_compile("../rds",
+indresp <- usoc_compile("../usoc_rds_data/",
                      extra_mappings = user_extra_mappings,
                      save_to_folder = TRUE,
                      file = "indresp")
+
+indresp[is.na(age), .N, waveid]
+indresp[is.na(sex), .N, waveid]
+indresp[is.na(race), .N, waveid]
 
 # indresp[!is.na(jbsoc90_cc), .N, wave]
 
@@ -75,7 +82,7 @@ user_extra_mappings <- function(usoc_file_column_names) {
   return(custom_variables)
 }
 
-hhresp <- usoc_compile("../rds",
+hhresp <- usoc_compile("../usoc_rds_data/",
                      extra_mappings = user_extra_mappings,
                      save_to_folder = TRUE,
                      file = "hhresp")
@@ -90,7 +97,7 @@ hhresp <- usoc_compile("../rds",
 
 
 
-usoc <- usoc_compile("../rds",
+usoc <- usoc_compile("../usoc_rds_data/",
                      file = "indresp")
 
 
@@ -106,7 +113,7 @@ youth_extra_mappings <- function(usoc_file_column_names) {
 
 }
 
-usoc <- usoc_compile("../rds", extra_mappings = youth_extra_mappings, file = "youth")
+usoc <- usoc_compile("../usoc_rds_data/", extra_mappings = youth_extra_mappings, file = "youth")
 
 usoc <- usoc_load()
 

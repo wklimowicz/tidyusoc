@@ -14,7 +14,7 @@ z <- data.frame(jbsoc00_cc = x2, jbsoc_description = nx$names)
 return(z)
 }
 
-s <- haven::read_sav("../spss/spss25/ukhls/a_indresp.sav")
+s <- haven::read_sav("../usoc_raw_data//spss25/ukhls/a_indresp.sav")
 z <- labels_to_data_frame(s$a_jbsoc00_cc)
 
 z %>%
