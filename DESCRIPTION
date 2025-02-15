@@ -3,7 +3,7 @@ Title: Tools for Working with the "Understanding Society" Dataset
 Version: 0.0.1
 Authors@R: 
     person("Wojtek", "Klimowicz", , "wojtekklimowicz96@gmail.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: Tools for compiling multiple waves of Understanding Society into one tidy data frame.
 License: MIT + file LICENSE
 URL: https://github.com/wklimowicz/tidyusoc,
     https://wklimowicz.github.io/tidyusoc/
